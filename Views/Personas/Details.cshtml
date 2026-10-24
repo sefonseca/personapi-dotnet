@@ -1,0 +1,60 @@
+@model PersonaDetalleDto
+@{
+    ViewData["Title"] = "Detalle de persona";
+}
+
+<h1 class="h3 mb-3">@Model.Nombre @Model.Apellido</h1>
+
+<dl class="row">
+    <dt class="col-sm-3">Cédula</dt>
+    <dd class="col-sm-9">@Model.Cc</dd>
+    <dt class="col-sm-3">Género</dt>
+    <dd class="col-sm-9">@(Model.Genero == "M" ? "Masculino" : "Femenino")</dd>
+    <dt class="col-sm-3">Edad</dt>
+    <dd class="col-sm-9">@(Model.Edad?.ToString() ?? "—")</dd>
+</dl>
+
+<div class="row g-4">
+    <div class="col-lg-6">
+        <h2 class="h5">Teléfonos</h2>
+        @if (Model.Telefonos.Count == 0)
+        {
+            <p class="text-muted">Sin teléfonos registrados.</p>
+        }
+        else
+        {
+            <ul class="list-group">
+                @foreach (var t in Model.Telefonos)
+                {
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>@t.Num</span><span class="text-muted">@t.Oper</span>
+                    </li>
+                }
+            </ul>
+        }
+    </div>
+    <div class="col-lg-6">
+        <h2 class="h5">Estudios</h2>
+        @if (Model.Estudios.Count == 0)
+        {
+            <p class="text-muted">Sin estudios registrados.</p>
+        }
+        else
+        {
+            <ul class="list-group">
+                @foreach (var e in Model.Estudios)
+                {
+                    <li class="list-group-item">
+                        <strong>@e.ProfesionNombre</strong><br />
+                        <span class="text-muted">@(e.Univer ?? "—") · @(e.Fecha?.ToString("yyyy-MM-dd") ?? "sin fecha")</span>
+                    </li>
+                }
+            </ul>
+        }
+    </div>
+</div>
+
+<div class="mt-4">
+    <a asp-action="Edit" asp-route-id="@Model.Cc" class="btn btn-primary">Editar</a>
+    <a asp-action="Index" class="btn btn-outline-secondary">Volver</a>
+</div>

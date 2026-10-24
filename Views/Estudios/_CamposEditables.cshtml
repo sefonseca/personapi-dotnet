@@ -1,0 +1,14 @@
+@model EstudioDto
+
+<div class="row">
+    <div class="col-md-8 mb-3">
+        <label asp-for="Univer" class="form-label"></label>
+        <input asp-for="Univer" class="form-control" />
+        <span asp-validation-for="Univer" class="text-danger"></span>
+    </div>
+    <div class="col-md-4 mb-3">
+        <label asp-for="Fecha" class="form-label"></label>
+        <input asp-for="Fecha" type="date" asp-format="{0:yyyy-MM-dd}" class="form-control" />
+        <span asp-validation-for="Fecha" class="text-danger"></span>
+    </div>
+</div>

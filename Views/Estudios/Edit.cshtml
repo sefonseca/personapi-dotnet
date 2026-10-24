@@ -1,0 +1,36 @@
+@model EstudioDto
+@{
+    ViewData["Title"] = "Editar estudio";
+}
+
+<h1 class="h3 mb-3">Editar estudio</h1>
+
+<div class="row">
+    <div class="col-lg-8">
+        <form asp-action="Edit" asp-route-idProf="@Model.IdProf" asp-route-ccPer="@Model.CcPer" method="post">
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+            <input type="hidden" asp-for="IdProf" />
+            <input type="hidden" asp-for="CcPer" />
+            <input type="hidden" asp-for="PersonaNombre" />
+            <input type="hidden" asp-for="ProfesionNombre" />
+
+            <dl class="row">
+                <dt class="col-sm-3">Persona</dt>
+                <dd class="col-sm-9">@Model.PersonaNombre (@Model.CcPer)</dd>
+                <dt class="col-sm-3">Profesión</dt>
+                <dd class="col-sm-9">@Model.ProfesionNombre</dd>
+            </dl>
+            <p class="form-text">La persona y la profesión forman la llave del estudio y no se pueden modificar.</p>
+
+            <partial name="_CamposEditables" model="Model" />
+
+            <button type="submit" class="btn btn-primary">Guardar cambios</button>
+            <a asp-action="Index" class="btn btn-outline-secondary">Cancelar</a>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
